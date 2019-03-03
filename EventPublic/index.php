@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
  <head>
-  <title>Calendrier événements public (avec réservation à l'espace)</title>
+  <title>Calendrier événements  (avec réservation à l'espace)</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.css" />
  
 
@@ -156,7 +156,7 @@
  </head>
  <body>
   <br />
-  <h2 align="center"><a href="#"><b>Calendrier événements public (avec réservation à l'espace)</b></a></h2>
+  <h2 align="center"><a href="#"><b>Calendrier événements (avec réservation à l'espace)</b></a></h2>
   <br />
   <div class="container">
    <div id="calendar"></div>
