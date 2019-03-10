@@ -73,7 +73,7 @@
   <div class="container">
    <div id="calendar"></div>
    <div id="eventContent" title="Event Details" style="display:none;">
-    <span><img src="Capture2.PNG"/></span>
+    <span><img src="Capture2.PNG"/></span><br/>
     Commence à: <span id="startTime"></span><br>
     Fini à: <span id="endTime"></span><br><br>
     <p id="eventInfo"></p>

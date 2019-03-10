@@ -67,16 +67,17 @@
     $(".fc-right").append('<select class="select_month"><option value="c">Toutes les salles</option><option value="b">Grande Salle</option><option value="a">Bureau 3</option>');
   
     $(".select_month").on("change", function(event) {
-    if(this.value=="a"){
-     $('#calendar').fullCalendar('removeResource', this.value);
-     
-    }
-    if(this.value=="b"){
-     $('#calendar').fullCalendar('removeResource', this.value); // à voir getressources avec le php load à la bdd   
-    }
-    if(this.value=="c"){
-       $('#calendar').fullCalendar('refetchResources');
-    }
+        if(this.value=="a"){
+            $('#calendar').fullCalendar('removeResource', this.value);
+        }
+
+        if(this.value=="b"){
+            $('#calendar').fullCalendar('removeResource', this.value); // à voir getressources avec le php load à la bdd
+        }
+
+        if(this.value=="c"){
+        $('#calendar').fullCalendar('refetchResources');
+        }
     
     });
       

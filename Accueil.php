@@ -4,9 +4,7 @@
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/flick/jquery-ui.css">
     <script type="text/javascript" src="//code.jquery.com/jquery-1.8.3.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-    
-    
- 
+
  
  <script>
  
@@ -15,10 +13,6 @@
     var dialog=$("#dialog").dialog({ modal: true,width:1100,height:700});
     
     });
-    
-     $( function() {
-        $( "e1" ).accordion(); //à tester
-        });
      
     function dropdownevent() {
         var x = document.getElementById("dropdownevent");

@@ -32,6 +32,10 @@
     font-size: 14px;
   }
 
+  .price{
+      color: #18ab29;
+  }
+
   </style>
 
   <script type="text/javascript"> document.getElementById('my_file').click();</script>
@@ -62,21 +66,38 @@
     selectHelper:true,
     select: function(start, end, allDay)
     {
-      var dialog=$("#dialog").dialog({ modal: true,width:600, buttons: {
-        'Valider' : function() {
-                            var title=document.getElementById('title').value;
-                            $.ajax({ //utilisation de ajax mais à voir si angular à une même méthode de requête
-                            url:"update2.php",
-                             type:"POST",
-                            data:{title:title, end:end, id:id},
-                            success:function(){
-                            calendar.fullCalendar('refetchEvents');
-                            alert('Événement ajouté avec succès');
-                             }
-                            });
-                            $(this).dialog('close');        
+        var start = $.fullCalendar.formatDate(start, "DD-MM-YYYY HH:mm:ss");
+        var end = $.fullCalendar.formatDate(end, "DD-MM-YYYY HH:mm:ss");
+        document.getElementById('hourstart').innerHTML = start.toString();
+        document.getElementById('hourend').innerHTML = end.toString();
+
+        var price =function(){ // fonction pour récupérer le prix de la réservation
+            $.ajax({
+                    url:"price.php", //fictif
+                    type:"GET",
+                    data:{start:start, end:end, allDay:allDay},
+                    dataType: 'text/html',
+                    success:function(data){
+                        document.getElementById('price').innerHTML =data.toString();
+                }
+            });
         }
-    } });
+
+        var dialog=$("#dialog").dialog({ modal: true,width:600, buttons: {
+            'Valider' : function() {
+
+                                    $.ajax({
+                                            url:"add.php",
+                                            type:"POST", data:{title:title, end:end, id:id},
+                                            success:function(){
+                                                calendar.fullCalendar('refetchEvents');
+                                                alert('Événement ajouté avec succès');
+                                                }
+                                    });
+                $("#dialog").dialog('close');
+            }
+        }
+        });
     },  
     editable:true,
     eventResize:function(event)
@@ -136,16 +157,18 @@
     $(".fc-right").append('<select class="select_month"><option value="c">Toutes les salles</option><option value="b">Grande Salle</option><option value="a">Bureau 3</option>');
   
     $(".select_month").on("change", function(event) {
-    if(this.value=="a"){
-     $('#calendar').fullCalendar('removeResource', this.value);
+        if(this.value=="a"){
+            $('#calendar').fullCalendar('removeResource', this.value);
      
-    }
-    if(this.value=="b"){
-     $('#calendar').fullCalendar('removeResource', this.value); // à voir getressources avec le php load à la bdd   
-    }
-    if(this.value=="c"){
-       $('#calendar').fullCalendar('refetchResources');
-    }
+        }
+
+        if(this.value=="b"){
+            $('#calendar').fullCalendar('removeResource', this.value); // à voir getressources avec le php load à la bdd
+        }
+
+        if(this.value=="c"){
+            $('#calendar').fullCalendar('refetchResources');
+        }
     
     });
       
@@ -159,10 +182,17 @@
   <div class="container">
    <div id="calendar"></div>
   </div>
-  <div id="dialog" title="Création événement/réservation" style="display: none;">
+  <div id="dialog" title="Création réservation" style="display: none;">
       <form>
-          <h6><b>Entrez l'intitulé de votre réservation</b></h6>
-          <input id="title" type="text">
+          <h6><b>Votre réservation</b></h6>
+          <br/>
+          <h6>Bureau 3 : </h6>
+          <br/>
+          <p id="hourstart"> Heure de début :</p>
+          <br/>
+          <p id="hourend"> heure de fin : </p>
+          <br/>
+          <p> Prix de réservation : </p><p id="price" class="price">120 €</p>
       </form>
   </div>
  </body>
